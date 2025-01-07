@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"> User Details</h4>
+                  <p class="card-description">Registered User details
+<!--                    Add class <code>.table-dark</code>-->
+                  </p>
+                  <div class="table-responsive pt-3">
+                    <table class="table table-dark">
+                      <thead>
+                        <tr>
+                          <th>
+                            Sl no.
+                          </th>
+                          <th>
+                            User name
+                          </th>
+                          <th>
+                            Email Address
+                          </th>
+                          <th>
+                            Mobile Number
+                          </th>
+                          <th>
+                            Password
+                          </th>
+                          <th>
+                            Actions
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for d in data %}
+                        <tr>
+                          <td>
+                            {{forloop.counter}}
+                          </td>
+                          <td>
+                             {{d.Username}}
+                          </td>
+                          <td>{{d.Email}}
+                          </td>
+                          <td>{{d.Mobile}}
+
+                          </td>
+                          <td>{{d.Password}}
+
+                          </td>
+                          <td>
+<!--                            <a href="{% url 'edit_category' c_id=d.id %}"><button type="submit" class="btn btn-secondary">Edit</button></a>-->
+                            <a href="{% url 'delete_user' u_id=d.id  %}"><button type="submit" class="btn btn-danger">Delete</button></a>
+
+
+                          </td>
+                        </tr>
+                      {% endfor %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+</body>
+</html>
+{% endblock %}

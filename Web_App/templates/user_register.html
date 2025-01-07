@@ -1,0 +1,165 @@
+
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+  	<title>Sign Up 10</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="{% static 'usersignup/css/style.css' %}">
+
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">E_Mart</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="text-wrap p-4 p-lg-5 d-flex img d-flex align-items-end" style="background-image: url({% static 'home/images/bg_2.jpg' %});">
+							<div class="text w-100">
+								<h2 class="mb-4">Welcome to E_Mart signup</h2>
+								<p>The place where you get fresh products within minutes in your hands.</p>
+							</div>
+			      </div>
+						<div class="login-wrap p-4 p-md-5">
+	      			<h3 class="mb-3">Create an account</h3>
+							<form action="{% url 'save_registration' %}" class="signup-form" method="post" enctype="multipart/form-data" onsubmit="password_val()" name="new">
+								{% csrf_token %}
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+					      			<label class="label" >Full Name</label>
+					      			<input type="text" class="form-control" placeholder="Full Name" name="uname">
+					      		</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+					      			<label class="label" >Email Address</label>
+					      			<input type="text" class="form-control" name="mail" placeholder="johndoe@email.com">
+					      		</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+					      			<label class="label">Phone no.</label>
+					      			<input type="text" class="form-control" placeholder="+01" name="mob">
+					      		</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+				            	<label class="label" >Password</label>
+				              <input type="password" class="form-control" placeholder="Password" name="pass" required>
+				            </div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+					      			<label class="label" >Confirm Password</label>
+					      			<input type="text" class="form-control" placeholder="Confirm Password" name="c_pass" required>
+					      		</div>
+									</div>
+									<div class="col-md-12 my-4">
+										<div class="form-group">
+				            	<div class="w-100">
+					            	<label class="checkbox-wrap checkbox-primary">I agree all statements in terms of service
+												  <input type="checkbox" checked>
+												  <span class="checkmark"></span>
+												</label>
+											</div>
+				            </div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+				            	<button type="submit" class="btn btn-success submit p-3">Create an account</button>
+				            </div>
+									</div>
+								</div>
+
+		          </form>
+		          <div class="social-wrap">
+		          	<p class="or">
+		          		<span>or</span>
+		          	</p>
+		      			<p class="mb-3 text-center">Signup with this services</p>
+		      			<p class="social-media d-flex justify-content-center">
+		      				<a href="#" class="social-icon google d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
+									<a href="#" class="social-icon facebook d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+									<a href="#" class="social-icon twitter d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+								</p>
+	          	</div>
+		          <div class="w-100 text-center">
+								<p class="mt-4">I'm already a member! <a href="{% url 'user_login' %}">Sign In</a></p>
+		          </div>
+		        </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="{% static 'usersignup/js/jquery.min.js' %}"></script>
+  <script src="{% static 'usersignup/js/popper.js' %}"></script>
+  <script src="{% static 'usersignup/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'usersignup/js/main.js' %}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+      {% if messages %}
+          {% for i in messages %}
+               {% if i.tags == 'success' %}
+                   <script>
+                       swal('{{i}}','','success');
+                   </script>
+               {% elif i.tags == 'error' %}
+                   <script>
+                       swal('{{i}}','','error');
+                   </script>
+               {% elif i.tags == 'warnings' %}
+                   <script>
+                       swal('{{i}}','','warnings');
+                   </script>
+               {% else %}
+                   <script>
+                       swal('{{i}}','','info');
+                   </script>
+               {% endif %}
+          {% endfor %}
+      {% endif %}
+    <script>
+        function password_val(){
+            p1=document.new.pass.value;
+            p2=document.new.c_pass.value;
+            a=document.new.uname.value;
+
+            if (p1==""){
+                alert("Password can't be blank")
+            }
+            else if(p2==""){
+                alert("Confirm Password can't be null")
+            }
+            else if(p1.length < 8){
+                alert("Password must contain atleat 8 characters....")
+            }
+            else if(p1==p2){
+                return true;
+            }
+            else if(a=="" || a==null){
+                alert("Username can't be blank")
+            }
+            else{
+                alert("Password doesn't match")
+            }
+
+        }
+    </script>
+
+	</body>
+</html>
+

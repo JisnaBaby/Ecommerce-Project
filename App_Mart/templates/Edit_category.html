@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+                <div class="card-body">
+                  <h4 class="card-title" style="Text-align:center">Category Form</h4>
+                  <p class="card-description">
+                    Add category details
+                  </p>
+                  <form class="forms-sample" method="post" action="{% url 'update_category' c_id=data.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label>Category Name</label>
+                      <input type="text" class="form-control"  placeholder="Category Name" name="category" value="{{data.Category_Name}}">
+                    </div>
+
+
+                    <div class="form-group">
+                      <label>Category Images</label>
+                      <img src="{{data.C_Images.url}}" width="30%">
+                      <input type="file" class="form-control"  placeholder="Upload Image" name="img">
+                    </div>
+
+
+<!--                    <div class="form-group">-->
+<!--                      <label>File upload</label>-->
+<!--                      <img src="{{data.C_Images.url}}" width="30%">-->
+<!--                      <input type="file" name="img" class="file-upload-default">-->
+<!--                      <div class="input-group col-xs-12">-->
+<!--                        <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">-->
+<!--                        <span class="input-group-append">-->
+<!--                          <button class="file-upload-browse btn btn-primary" type="button">Upload</button>-->
+<!--                        </span>-->
+<!--                      </div>-->
+<!--                    </div>-->
+
+                    <div class="form-group">
+                      <label for="exampleTextarea1">Description</label>
+                      <textarea class="form-control" name="descript" id="exampleTextarea1" rows="4">{{data.Description}}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light" type="submit">Cancel</button>
+                  </form>
+                </div>
+              </div>
+
+</body>
+</html>
+{% endblock %}
