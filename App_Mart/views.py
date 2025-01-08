@@ -5,7 +5,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
-from Web_App.models import contactdb,Registerdb
+from Web_App.models import contactdb,Registerdb,OrderDb,CartDb
 from django.contrib import messages
 
 
@@ -149,6 +149,17 @@ def delete_user(req, pr_id):
     x = Registerdb.objects.filter(id=pr_id)
     x.delete()
     return redirect(display_user)
+
+def display_order(request):
+    cart=CartDb.objects.all()
+    order=OrderDb.objects.all()
+    return render(request,"Display_Order.html",{'order':order,'cart':cart})
+def delete_order(request,o_id):
+     x=CartDb.objects.filter(id=o_id)
+     x.delete()
+     return redirect(display_order)
+
+
 
 
 

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Details</title>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="col-lg-12 mt-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Order Details</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered verticle-middle" >
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Sl no</th>
+                                                <th scope="col">User Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Address</th>
+                                                <th scope="col">Mobile</th>
+                                                <th scope="col">Place</th>
+                                                <th scope="col">State</th>
+                                                <th scope="col">Pincode</th>
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Product Image</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Sub Total Price</th>
+                                                <th scope="col">Total Price</th>
+                                                <th scope="col">Message</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for d in order %}
+                                            {% for c in cart %}
+
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{d.Name}}</td>
+                                                <td>{{d.Email}}</td>
+                                                <td>{{d.Address}}</td>
+                                                <td>{{d.Mobile}}</td>
+                                                <td>{{d.Place}}</td>
+                                                <td>{{d.State}}</td>
+                                                <td>{{d.Pin}}</td>
+                                                <td>{{c.ProductName}}</td>
+                                                <td>{{c.Quantity}}</td>
+                                                <td>{{c.Price}}</td>
+                                                <td>{{c.TotalPrice}}</td>
+                                                <td><img src="{{c.Prod_Image.url}}"></td>
+                                                <td>{{d.Total_Price}}</td>
+                                                <td>{{d.Message}}</td>
+
+                                                <td>
+                                                    <span>
+<!--                                                        <a href="{% url 'edit_product' pr_id=d.id %}"><button type="submit" class="btn btn-secondary">Edit</button></a>-->
+                                                        <a href="{% url 'delete_order' o_id=d.id  %}"><button type="submit" class="btn btn-danger">Delete</button></a>
+
+
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    </div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+      {% if messages %}
+          {% for i in messages %}
+               {% if i.tags == 'success' %}
+                   <script>
+                       swal('{{i}}','','success');
+                   </script>
+               {% elif i.tags == 'error' %}
+                   <script>
+                       swal('{{i}}','','error');
+                   </script>
+               {% elif i.tags == 'warnings' %}
+                   <script>
+                       swal('{{i}}','','warnings');
+                   </script>
+               {% else %}
+                   <script>
+                       swal('{{i}}','','info');
+                   </script>
+               {% endif %}
+          {% endfor %}
+      {% endif %}
+
+</body>
+</html>
+{% endblock %}

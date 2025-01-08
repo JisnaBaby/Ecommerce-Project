@@ -60,6 +60,15 @@ def save_registration(req):
         pwd=req.POST.get('pass')
         cpwd=req.POST.get('c_pass')
         obj=Registerdb(Username=user,Email=em,Mobile=phn,Password=pwd,C_Password=cpwd)
+        if Registerdb.objects.filter(Username=user).exists():
+            messages.warning(req,"User already exist....")
+            return redirect(user_registration)
+        elif Registerdb.objects.filter(Email=em).exists():
+            messages.warning(req,"Email already exist....")
+            return redirect(user_registration)
+        elif Registerdb.objects.filter(Mobile=phn).exists():
+            messages.warning(req,"Number already exist....")
+            return redirect(user_registration)
         obj.save()
         messages.success(req,"Registered to E Mart Successfully......")
         return redirect(user_registration)

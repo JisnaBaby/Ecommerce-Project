@@ -23,7 +23,9 @@ urlpatterns=[
     path('display_contact/', views.display_contact, name="display_contact"),
     path('delete_contact/<int:co_id>/', views.delete_contact, name="delete_contact"),
     path('display_user/', views.display_user, name="display_user"),
+    path('display_order/', views.display_order, name="display_order"),
     path('delete_user/<int:u_id>/', views.delete_user, name="delete_user"),
+    path('delete_order/<int:o_id>/', views.delete_order, name="delete_order"),
 
 
 ]
